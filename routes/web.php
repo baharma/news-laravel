@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('back-end.admin.dasboard');
 });
+//resorce admin
+Route::resource('descriptsion', 'DescripsionController');
+Route::resource('imagenews', 'ImageNewsController');
+Route::resource('newslatter', 'NewslatterController');
+Route::resource('thumnail', 'ThumbnailController');
 Route::resource('category', 'CategoryController');
 
 Auth::routes();

@@ -14,7 +14,10 @@ class CreateImageNewsTable extends Migration
     public function up()
     {
         Schema::create('image_news', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('title');
+            $table->text('image');
+            $table->string('date');
             $table->timestamps();
         });
     }

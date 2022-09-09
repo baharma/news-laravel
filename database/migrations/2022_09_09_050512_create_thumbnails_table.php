@@ -14,7 +14,10 @@ class CreateThumbnailsTable extends Migration
     public function up()
     {
         Schema::create('thumbnails', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('newslatter_id');
+            $table->text('image');
+            $table->string('date');
             $table->timestamps();
         });
     }

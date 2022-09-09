@@ -14,7 +14,11 @@ class CreateNewslattersTable extends Migration
     public function up()
     {
         Schema::create('newslatters', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('image_id');
+            $table->uuid('description_id');
+            $table->uuid('users');
+            $table->string('date');
             $table->timestamps();
         });
     }

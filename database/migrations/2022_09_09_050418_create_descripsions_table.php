@@ -14,7 +14,10 @@ class CreateDescripsionsTable extends Migration
     public function up()
     {
         Schema::create('descripsions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('title');
+            $table->string('description')->nullable();
+            $table->string('date');
             $table->timestamps();
         });
     }
