@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Descripsion;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class DescripsionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $item = Category::all();
-        return view(
-            'back-end.admin.category.index',
-            ['item' => $item]
-        );
+        //
     }
 
     /**
@@ -28,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('back-end.admin.category.add');
+        //
     }
 
     /**
@@ -39,21 +35,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $form = array(
-            'title' => $request->title,
-        );
-
-        Category::create($form);
-        return redirect()->route('category.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Descripsion $descripsion)
     {
         //
     }
@@ -61,41 +52,34 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Descripsion $descripsion)
     {
-        return view('back-end.admin.category.edit', ['category' => $category]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Descripsion $descripsion)
     {
-        $form = array(
-            'title' => $request->title,
-        );
-
-        Category::whereId($id)->update($form);
-        return redirect()->route('category.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Descripsion $descripsion)
     {
-        $item = Category::findOrFail($id);
-        $item->delete();
-        return redirect()->route('category.index');
+        //
     }
 }
