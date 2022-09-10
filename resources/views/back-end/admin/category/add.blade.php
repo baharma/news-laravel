@@ -6,6 +6,7 @@
       <label for="exampleInputEmail1" class="form-label">Title category News</label>
       <input type="text" class="form-control" id="exampleInputEmail1" name="title" aria-describedby="emailHelp" placeholder="Enter Name">
       <div class="form-text">Silahkan masukan category</div>
+
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

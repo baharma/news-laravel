@@ -18,7 +18,6 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -36,9 +35,11 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
+                <h6 class="collapse-header">List Category:</h6>
                 <a class="collapse-item" href="{{route('category.index')}}">Category</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+                <a class="collapse-item" href="{{route('imagenews.index')}}">Image News</a>
+                <a class="collapse-item" href="{{route('descriptsion.index')}}">Descriptsion News</a>
+                <a class="collapse-item" href="{{route('thumnail.index')}}">Thumbnail</a>
             </div>
         </div>
     </li>
@@ -61,7 +62,6 @@
             </div>
         </div>
     </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 

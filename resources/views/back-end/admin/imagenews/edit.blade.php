@@ -4,14 +4,16 @@
     <div class="col-sm-6 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{route('category.create')}}" class="btn btn-primary"> Add Data Category</a>
+                <a href="{{route('imagenews.create')}}" class="btn btn-primary"> Add Data Category</a>
             </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col" width="10%">#</th>
-                            <th scope="col"width="50%">Title</th>
+                            <th scope="col"width="30%">Title</th>
+                            <th scope="col"width="30%">Image</th>
+                            <th scope="col"width="50%">Date</th>
                             <th scope="col" width="20%">Action</th>
                         </tr>
                     </thead>
@@ -23,10 +25,10 @@
                             <th scope="row">{{$i}}</th>
                             <td>{{$items->title}}</td>
                             <td style="display:flex ">
-                                <a href="{{route('category.edit',$items->id)}}" class="m-1 btn btn-info">
+                                <a href="{{route('imagenews.edit',$items->id)}}" class="m-1 btn btn-info">
                                     <i class="fa fa-pencil-alt">Edit</i>
                                 </a>
-                                <form method="POST" class="m-1" action="{{route('category.destroy', $items->id)}}">
+                                <form method="POST" class="m-1" action="{{route('imagenews.destroy', $items->id)}}">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" data-id="{{$items->id}}" class="btn btn-danger delete-item" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash">Delete</i></button>

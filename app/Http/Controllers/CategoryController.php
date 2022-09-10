@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $item = DB::table('categories')->paginate('2');
+        $item = DB::table('categories')
+            ->orderBy('created_at', 'desc')->paginate('10');
 
         return view(
             'back-end.admin.category.index',
@@ -88,8 +89,16 @@ class CategoryController extends Controller
             'title' => $request->title,
         );
 
-        Category::whereId($id)->update($form);
-        return redirect()->route('category.index');
+        try {
+            Category::whereId($id)->update($form);
+            return redirect()->route('category.index')->with('message', 'Data Update !');;;
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error pada data update!');
+        } catch (\Exception $th) {
+            DB::rollback();
+            return redirect()->back()->withErrors('inline' . $th->getLine() . ' ' . $th->getMessage());
+        }
     }
 
     /**
@@ -103,6 +112,6 @@ class CategoryController extends Controller
         $item = Category::find($id);
         $item->delete();
         return redirect()->back()
-            ->with('error', 'Error during the creation!')->with('message', 'Data delete !');;
+            ->with('error', 'Error during the creation!')->with('message', 'Data delete !');
     }
 }

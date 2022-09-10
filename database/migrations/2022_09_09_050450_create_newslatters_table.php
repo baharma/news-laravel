@@ -15,6 +15,8 @@ class CreateNewslattersTable extends Migration
     {
         Schema::create('newslatters', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('title');
+            $table->string('slug');
             $table->uuid('image_id');
             $table->uuid('description_id');
             $table->uuid('users');
