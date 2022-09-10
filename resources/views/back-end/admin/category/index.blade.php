@@ -10,9 +10,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" width="20%">#</th>
+                            <th scope="col"width="20%">Title</th>
+                            <th scope="col" width="20%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,22 +22,22 @@
                         <tr>
                             <th scope="row">{{$i}}</th>
                             <td>{{$items->title}}</td>
-                            <td>
+                            <td style="display:flex ">
                                 <a href="{{route('category.edit',$items->id)}}" class="btn btn-info">
                                     <i class="fa fa-pencil-alt">Edit</i>
                                 </a>
-                                <form action="{{route('category.destroy',$items->id)}}" method="post" class="d-inline" >
+                                <form method="POST" action="{{route('category.destroy', $items->id)}}">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger">
-                                        <i class="fa fa-trash">Delete</i>
-                                    </button>
+                                    <button type="submit" data-id="{{$items->id}}" class="btn btn-danger delete-item" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash">Delete</i></button>
                                 </form>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
+                {{ $item->links() }}
             </div>
         </div>
     </div>

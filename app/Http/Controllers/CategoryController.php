@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -14,10 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $item = Category::all();
+        $item = DB::table('categories')->paginate('2');
+
         return view(
             'back-end.admin.category.index',
-            ['item' => $item]
+            compact('item')
         );
     }
 
@@ -42,9 +44,13 @@ class CategoryController extends Controller
         $form = array(
             'title' => $request->title,
         );
-
-        Category::create($form);
-        return redirect()->route('category.index');
+        try {
+            Category::create($form);
+            return redirect()->route('category.index')->with('message', 'Data created !');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -94,8 +100,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = Category::find($id);
         $item->delete();
-        return redirect()->route('category.index');
+        return redirect()->back()
+            ->with('error', 'Error during the creation!')->with('message', 'Data delete !');;
     }
 }
