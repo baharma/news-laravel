@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ImageNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use File;
 
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -63,7 +64,7 @@ class ImageNewsController extends Controller
             } else {
                 $dataArray = array(
                     'title' => $request->title,
-                    'image' => asset('asset/img/notfount.png'),
+                    'image' => asset('assets/img/notfount.png'),
                     'date' => $request->date,
                 );
             }
@@ -89,7 +90,6 @@ class ImageNewsController extends Controller
      */
     public function show(ImageNews $imageNews)
     {
-        //
     }
 
     /**
@@ -98,9 +98,10 @@ class ImageNewsController extends Controller
      * @param  \App\ImageNews  $imageNews
      * @return \Illuminate\Http\Response
      */
-    public function edit(ImageNews $imageNews)
+    public function edit(ImageNews $imageNews, $id)
     {
-        //
+        $data = ImageNews::findOrFail($id);
+        return view('back-end.admin.imagenews.edit', ['data' => $data]);
     }
 
     /**
@@ -110,9 +111,42 @@ class ImageNewsController extends Controller
      * @param  \App\ImageNews  $imageNews
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ImageNews $imageNews)
+    public function update(Request $request, ImageNews $imageNews, $id)
     {
-        //
+        $name = rand(1, 99999) . now()->format('Y-m-d-H-i-s');
+        try {
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $name_img = $name . '.' . $image->getClientOriginalExtension();
+                $path = public_path('assets/img');
+                $imgImage = Image::make($image->getRealPath());
+                $imgImage->resize(400, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path . '/' . $name_img);
+
+                $dataArray = array(
+                    'title' => $request->title,
+                    'image' => asset('assets/img') . '/' . $name_img,
+                    'date' => $request->date,
+                );
+            } else {
+                $dataArray = array(
+                    'title' => $request->title,
+                    'date' => $request->date,
+                );
+            }
+
+            ImageNews::whereId($id)->update($dataArray);
+            DB::commit();
+            return redirect()->route('imagenews.index')->with('message', 'Data Updates !');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->with('error', 'Error pada data update!');
+        } catch (\Exception $th) {
+            DB::rollback();
+            return redirect()->back()->withErrors('inline' . $th->getLine() . ' ' . $th->getMessage());
+        }
     }
 
     /**
@@ -121,8 +155,9 @@ class ImageNewsController extends Controller
      * @param  \App\ImageNews  $imageNews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ImageNews $imageNews)
+    public function destroy(ImageNews $imageNews, $id)
     {
-        //
+        ImageNews::whereId($id)->delete();
+        return redirect()->back()->with('message', 'Data delete !');
     }
 }

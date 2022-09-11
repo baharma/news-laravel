@@ -1,47 +1,33 @@
 @extends('back-end.layout.app')
 @section('content')
-<div class="row row-xs">
-    <div class="col-sm-6 col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <a href="{{route('imagenews.create')}}" class="btn btn-primary"> Add Data Category</a>
+<form method="POST" action="{{route('imagenews.update',$data->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="mb-3 card-body">
+        <div class="row" style=" ">
+
+            <div class=" col-12">
+                <label for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" name="title"
+                    placeholder="Example input placeholder" value="{{$data->title}}">
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" width="10%">#</th>
-                            <th scope="col"width="30%">Title</th>
-                            <th scope="col"width="30%">Image</th>
-                            <th scope="col"width="50%">Date</th>
-                            <th scope="col" width="20%">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i=0 ?>
-                        @foreach ($item as $items)  
-                        <?php $i++ ?>
-                        <tr>
-                            <th scope="row">{{$i}}</th>
-                            <td>{{$items->title}}</td>
-                            <td style="display:flex ">
-                                <a href="{{route('imagenews.edit',$items->id)}}" class="m-1 btn btn-info">
-                                    <i class="fa fa-pencil-alt">Edit</i>
-                                </a>
-                                <form method="POST" class="m-1" action="{{route('imagenews.destroy', $items->id)}}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" data-id="{{$items->id}}" class="btn btn-danger delete-item" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash">Delete</i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    
-                </table>
-                {{ $item->links() }}
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Photo</label>
+
+                    <input type="file" class="dropify" data-height="200" name="image" />
+                    <img src="{{$data->image}}" alt="" style="float: right" class="card-img-bottom" width="200" height="200">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label for="formGroupExampleInput2" class="form-label">Date</label>
+                <input type="text" class="date form-control" value="{{$data->date}}" placeholder="isi kan tanggal pembuatan" name="date" />
             </div>
         </div>
     </div>
-</div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 @endsection
