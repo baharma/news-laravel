@@ -144,14 +144,16 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js">
     </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     @stack('script')
     <script>
+         $('.dropify').dropify();
         $(function () {
-
+            $('.dropify').dropify();
             $(".date").datepicker({
                 format: "dd-mm-yyyy",
             });
-            $('.dropify').dropify();
+        
             $('[data-toggle="tooltip"]').tooltip()
 
 
