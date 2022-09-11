@@ -6,6 +6,8 @@ use App\ImageNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 class ImageNewsController extends Controller
 {
     /**
@@ -42,6 +44,41 @@ class ImageNewsController extends Controller
      */
     public function store(Request $request)
     {
+        $name = rand(1, 99999) . now()->format('Y-m-d-H-i-s');
+        try {
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $name_img = $name . '.' . $image->getClientOriginalExtension();
+                $path = public_path('assets/img');
+                $imgImage = Image::make($image->getRealPath());
+                $imgImage->resize(400, 400, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path . '/' . $name_img);
+
+                $dataArray = array(
+                    'title' => $request->title,
+                    'image' => asset('assets/img') . '/' . $name_img,
+                    'date' => $request->date,
+                );
+            } else {
+                $dataArray = array(
+                    'title' => $request->title,
+                    'image' => asset('asset/img/notfount.png'),
+                    'date' => $request->date,
+                );
+            }
+
+            ImageNews::create($dataArray);
+            DB::commit();
+            return redirect()->route('imagenews.index')->with('message', 'Data created !');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->with('error', 'Error pada data update!');
+        } catch (\Exception $th) {
+            DB::rollback();
+            return redirect()->back()->withErrors('inline' . $th->getLine() . ' ' . $th->getMessage());
+        }
     }
 
     /**

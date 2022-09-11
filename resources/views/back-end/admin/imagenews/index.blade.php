@@ -11,10 +11,10 @@
                     <thead>
                         <tr>
                             <th scope="col" width="10%">#</th>
-                            <th scope="col"width="50%">Title</th>
-                            <th scope="col"width="50%">Image</th>
-                            <th scope="col"width="50%">Date</th>
-                            <th scope="col" width="20%">Action</th>
+                            <th scope="col"width="30%">Title</th>
+                            <th scope="col"width="30%">Image</th>
+                            <th scope="col"width="30%">Date</th>
+                            <th scope="col" width="10%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
