@@ -1,6 +1,6 @@
 @extends('back-end.layout.app')
 @section('content')
-<form method="POST" action="{{route('imagenews.update',$data->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
+<form method="POST" action="{{route('descriptsion.update',$descripsion->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mb-3 card-body">
@@ -9,22 +9,22 @@
             <div class=" col-12">
                 <label for="formGroupExampleInput" class="form-label">Title</label>
                 <input type="text" class="form-control" id="formGroupExampleInput" name="title"
-                    placeholder="Example input placeholder" value="{{$data->title}}">
+                    placeholder="masukan title" value="{{$descripsion->title}}">
             </div>
 
-
-            <div class="col-md-3">
+            <div class="col-12">
                 <div class="form-group">
-                    <label for="">Photo</label>
-
-                    <input type="file" class="dropify" data-height="200" name="image" />
-                    <img src="{{$data->image}}" alt="" style="float: right" class="card-img-bottom" width="200" height="200">
+                    <label for="">descripsions</label>
+                    <textarea type="text" class="form-control" id="" name="description"
+                    placeholder="Tulis lah teks masimal 9999 teks" rows="40">{{$descripsion->description}}</textarea>
                 </div>
             </div>
 
             <div class="col-12">
                 <label for="formGroupExampleInput2" class="form-label">Date</label>
-                <input type="text" class="date form-control" value="{{$data->date}}" placeholder="isi kan tanggal pembuatan" name="date" readonly/>
+                <input type="text" class="date form-control" placeholder="isi kan tanggal pembuatan" name="date" 
+                value="{{$descripsion->date}}" readonly
+                />
             </div>
         </div>
     </div>

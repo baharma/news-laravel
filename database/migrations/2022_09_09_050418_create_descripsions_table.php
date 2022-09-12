@@ -16,7 +16,7 @@ class CreateDescripsionsTable extends Migration
         Schema::create('descripsions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('description', 9999)->nullable();
             $table->string('date');
             $table->timestamps();
         });

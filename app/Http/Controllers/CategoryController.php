@@ -73,7 +73,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('back-end.admin.category.edit', ['category' => $category]);
+        return view(
+            'back-end.admin.category.edit',
+            ['category' => $category]
+        );
     }
 
     /**

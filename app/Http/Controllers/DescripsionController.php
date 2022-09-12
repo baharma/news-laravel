@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Descripsion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DescripsionController extends Controller
 {
@@ -14,7 +15,13 @@ class DescripsionController extends Controller
      */
     public function index()
     {
-        //
+        $item = DB::table('descripsions')
+            ->orderBy('created_at', 'desc')->paginate('10');
+
+        return view(
+            'back-end.admin.description.index',
+            compact('item')
+        );
     }
 
     /**
@@ -24,7 +31,7 @@ class DescripsionController extends Controller
      */
     public function create()
     {
-        //
+        return view('back-end.admin.description.add');
     }
 
     /**
@@ -35,7 +42,15 @@ class DescripsionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form = $request->all();
+
+        try {
+            Descripsion::create($form);
+            return redirect()->route('descriptsion.index')->with('message', 'Data created !');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -46,7 +61,6 @@ class DescripsionController extends Controller
      */
     public function show(Descripsion $descripsion)
     {
-        //
     }
 
     /**
@@ -55,9 +69,10 @@ class DescripsionController extends Controller
      * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Descripsion $descripsion)
+    public function edit(Descripsion $descripsion, $id)
     {
-        //
+        $data['descripsion'] = Descripsion::whereId($id)->first();
+        return view('back-end.admin.description.edit', $data);
     }
 
     /**
