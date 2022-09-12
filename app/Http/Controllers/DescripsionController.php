@@ -82,9 +82,23 @@ class DescripsionController extends Controller
      * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Descripsion $descripsion)
+    public function update(Request $request, $id)
     {
-        //
+        $form = array(
+            'title' => $request->title,
+            'description' => $request->description,
+            'date' => $request->date,
+        );
+        try {
+            Descripsion::whereId($id)->update($form);
+            return redirect()->route('descriptsion.index')->with('message', 'Data Update !');;;
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error pada data update!');
+        } catch (\Exception $th) {
+            DB::rollback();
+            return redirect()->back()->withErrors('inline' . $th->getLine() . ' ' . $th->getMessage());
+        }
     }
 
     /**
@@ -93,8 +107,11 @@ class DescripsionController extends Controller
      * @param  \App\Descripsion  $descripsion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Descripsion $descripsion)
+    public function destroy(Descripsion $descripsion, $id)
     {
-        //
+        $item = Descripsion::find($id);
+        $item->delete();
+        return redirect()->back()
+            ->with('error', 'Error during the creation!')->with('message', 'Data delete !');
     }
 }
