@@ -14,7 +14,6 @@ class NewslatterController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**

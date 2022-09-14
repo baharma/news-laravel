@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('back-end.admin.dasboard');
-});
+
+Route::get('/', 'reader\HomeController@index');
 //resorce admin
-Route::resource('descriptsion', 'DescripsionController');
-Route::resource('imagenews', 'ImageNewsController');
-Route::resource('newslatter', 'NewslatterController');
-Route::resource('thumnail', 'ThumbnailController');
-Route::resource('category', 'CategoryController');
+
+
+
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
+    Route::get('/', 'DashboardController@index');
+    Route::resource('descriptsion', 'DescripsionController');
+    Route::resource('imagenews', 'ImageNewsController');
+    Route::resource('newslatter', 'NewslatterController');
+    Route::resource('thumnail', 'ThumbnailController');
+    Route::resource('category', 'CategoryController');
+});
+
+
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
