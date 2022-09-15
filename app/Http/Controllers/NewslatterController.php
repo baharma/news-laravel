@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Newslatter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewslatterController extends Controller
 {
@@ -14,6 +15,12 @@ class NewslatterController extends Controller
      */
     public function index()
     {
+        $item = DB::table('newslatters')->with([
+            'descripsion_event',
+            'category_event',
+            'image_event'
+        ])->orderBy('created_at', 'desc')->paginate('10');
+        return view('back-end.admin.newslatter.index', compact('item'));
     }
 
     /**
@@ -23,7 +30,6 @@ class NewslatterController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**

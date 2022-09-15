@@ -19,4 +19,8 @@ class Descripsion extends Model
             $model->id = Uuid::uuid4();
         });
     }
+    public function descripsion_news()
+    {
+        return $this->belongsTo(Newslatter::class, 'description_id', 'id');
+    }
 }

@@ -19,4 +19,8 @@ class ImageNews extends Model
             $model->id = Uuid::uuid4();
         });
     }
+    public function image_news()
+    {
+        return $this->hasMany(Newslatter::class, 'image_id', 'id');
+    }
 }

@@ -19,7 +19,8 @@ class CreateNewslattersTable extends Migration
             $table->string('slug');
             $table->uuid('image_id');
             $table->uuid('description_id');
-            $table->uuid('users');
+            $table->uuid('category_id');
+            $table->integer('users');
             $table->string('date');
             $table->timestamps();
         });

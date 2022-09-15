@@ -40,6 +40,7 @@
                 <a class="collapse-item" href="{{route('imagenews.index')}}">Image News</a>
                 <a class="collapse-item" href="{{route('descriptsion.index')}}">Descriptsion News</a>
                 <a class="collapse-item" href="{{route('thumnail.index')}}">Thumbnail</a>
+                <a class="collapse-item" href="{{route('newslatter.index')}}">Newslatter</a>
             </div>
         </div>
     </li>

@@ -19,4 +19,8 @@ class Category extends Model
             $model->id = Uuid::uuid4();
         });
     }
+    public function category_news()
+    {
+        return $this->belongsTo(Newslatter::class, 'category_id', 'id');
+    }
 }
