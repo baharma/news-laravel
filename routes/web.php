@@ -20,8 +20,8 @@ Route::get('/', 'reader\HomeController@index');
 
 
 
-Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
-    Route::get('/', 'DashboardController@index');
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('descriptsion', 'DescripsionController');
     Route::resource('imagenews', 'ImageNewsController');
     Route::resource('newslatter', 'NewslatterController');
@@ -38,4 +38,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Auth::routes(['verify' => true]);
