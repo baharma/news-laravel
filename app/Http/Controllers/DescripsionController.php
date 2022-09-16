@@ -15,8 +15,7 @@ class DescripsionController extends Controller
      */
     public function index()
     {
-        $item = DB::table('descripsions')
-            ->orderBy('created_at', 'desc')->paginate('10');
+        $item = Descripsion::orderBy('created_at', 'desc')->paginate('10');
 
         return view(
             'back-end.admin.description.index',

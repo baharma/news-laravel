@@ -18,8 +18,7 @@ class ImageNewsController extends Controller
      */
     public function index()
     {
-        $item = DB::table('image_news')
-            ->orderBy('created_at', 'desc')->paginate('10');
+        $item = ImageNews::orderBy('created_at', 'desc')->paginate('10');
 
         return view(
             'back-end.admin.imagenews.index',

@@ -20,7 +20,7 @@ class CreateNewslattersTable extends Migration
             $table->uuid('image_id');
             $table->uuid('description_id');
             $table->uuid('category_id');
-            $table->integer('users');
+            $table->string('users');
             $table->string('date');
             $table->timestamps();
         });
