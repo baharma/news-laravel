@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use App\Newslatter;
 
 class Category extends Model
 {
@@ -21,6 +22,6 @@ class Category extends Model
     }
     public function category_news()
     {
-        return $this->belongsTo(Newslatter::class, 'category_id', 'id');
+        return $this->belongsTo(Newslatter::class, 'id', 'category_id');
     }
 }

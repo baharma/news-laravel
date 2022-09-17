@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use App\Newslatter;
 
 class Descripsion extends Model
 {
+    protected $fillable = [];
     protected $guarded = [];
     protected $casts = [
         'id' => 'string'
     ];
+    protected $hidden = [];
     public $incrementing = false;
     public static function boot()
     {
@@ -21,6 +24,6 @@ class Descripsion extends Model
     }
     public function descripsion_news()
     {
-        return $this->belongsTo(Newslatter::class, 'description_id', 'id');
+        return $this->belongsTo(Newslatter::class, 'id', 'description_id');
     }
 }

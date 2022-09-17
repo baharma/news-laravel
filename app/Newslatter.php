@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
-use app\Descripsion;
-use app\Category;
-use app\ImageNews;
+use App\Descripsion;
+use App\Category;
+use App\ImageNews;
 
 
 class Newslatter extends Model
@@ -31,14 +31,14 @@ class Newslatter extends Model
 
     public function descripsion_event()
     {
-        return $this->hasMany(Descripsion::class, 'description_id', 'id');
+        return $this->hasMany(Descripsion::class, 'id', 'description_id');
     }
     public function category_event()
     {
-        return $this->hasMany(Category::class, 'category_id', 'id');
+        return $this->hasMany(Category::class, 'id', 'category_id');
     }
     public function image_event()
     {
-        return $this->hasMany(ImageNews::class, 'image_id', 'id');
+        return $this->hasMany(ImageNews::class, 'id', 'image_id');
     }
 }

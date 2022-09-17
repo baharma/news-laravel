@@ -11,20 +11,31 @@
                     <thead>
                         <tr>
                             <th scope="col" width="10%">#</th>
-                            <th scope="col"width="30%">Title</th>
-                            <th scope="col"width="30%">Image</th>
-                            <th scope="col"width="30%">Description</th>
-                            <th scope="col" width="30%">Category</th>
-                            <th scope="col" width="30%">Date</th>
-                            <th scope="col" width="10%">Action</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Description</th>
+                            <th scope="col" >Category</th>
+                            <th scope="col" >Date</th>
+                            <th scope="col" >Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       
+                        <?php $i=0 ?>
+                        @foreach ($item as $items)  
+                        <?php $i++ ?>
+                        <tr>
+                            <td>{{$i}}</td>
+                            <td>{{$items->title}}</td>
+                            <td><img src="{{$items->image_event->image}}" alt=""></td>
+                            <td>{{$items->descripsion_event->description}}</td>
+                            <td>{{$items->category_event->title}}</td>
+                            <td>{{$items->date}}</td>
+                            <td></td>
+                        </tr>
+                        @endforeach
                     </tbody>
-                    
                 </table>
-            
+                {{ $item->links() }}
             </div>
         </div>
     </div>

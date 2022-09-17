@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use App\Newslatter;
 
 class ImageNews extends Model
 {
@@ -21,6 +22,6 @@ class ImageNews extends Model
     }
     public function image_news()
     {
-        return $this->hasMany(Newslatter::class, 'image_id', 'id');
+        return $this->hasMany(Newslatter::class, 'id', 'image_id');
     }
 }
