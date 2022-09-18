@@ -121,14 +121,14 @@ class NewslatterController extends Controller
         $category =  Category::find($data->category_id);
         $Descripsions = Descripsion::find($data->description_id);
         $image = ImageNews::find($data->image_id);
-       
+
         $categorydata = Category::all();
-        return view('back-end.admin.newslatter.edit',[
-            'category'=>$category,
-            'Descripsions'=>$Descripsions,
-            'image'=>$image,
-            'data'=>$data,
-            'categorydata'=>$categorydata
+        return view('back-end.admin.newslatter.edit', [
+            'category' => $category,
+            'Descripsions' => $Descripsions,
+            'image' => $image,
+            'data' => $data,
+            'categorydata' => $categorydata
         ]);
     }
 
@@ -139,7 +139,7 @@ class NewslatterController extends Controller
      * @param  \App\Newslatter  $newslatter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $name = rand(1, 99999) . now()->format('Y-m-d-H-i-s');
 
@@ -189,7 +189,6 @@ class NewslatterController extends Controller
         Newslatter::whereId($id)->update($form);
 
         return redirect()->route('newslatter.index')->with('message', 'Data created !');
-
     }
 
     /**
@@ -200,6 +199,9 @@ class NewslatterController extends Controller
      */
     public function destroy($id)
     {
+        $data = Newslatter::find($id);
+        ImageNews::whereId($data->image_id)->delete();
+        Descripsion::whereId($data->description_id)->delete();
         Newslatter::whereId($id)->delete();
         return redirect()->back()->with('message', 'Data delete !');
     }

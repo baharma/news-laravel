@@ -7,6 +7,7 @@ use Ramsey\Uuid\Uuid;
 use App\Descripsion;
 use App\Category;
 use App\ImageNews;
+use App\Thumbnail;
 
 
 class Newslatter extends Model
