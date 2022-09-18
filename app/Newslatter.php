@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 use App\Descripsion;
 use App\Category;
 use App\ImageNews;
-use App\Thumbnail;
+
 
 
 class Newslatter extends Model
@@ -41,5 +41,9 @@ class Newslatter extends Model
     public function image_event()
     {
         return $this->belongsTo(ImageNews::class, 'image_id');
+    }
+    public function thumnail_id()
+    {
+        return $this->hasMany(Thumnaild::class, 'title_news');
     }
 }

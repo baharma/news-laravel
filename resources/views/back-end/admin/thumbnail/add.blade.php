@@ -7,7 +7,7 @@
 
             <div class="form-group col-12">
                 <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1" name="newslatter_id">
+                <select class="form-control" id="exampleFormControlSelect1" name="title_news">
                     @foreach($item as $datas)
                     <option value="{{ $datas->id}}">
                         {{$datas->title}}
@@ -16,6 +16,7 @@
                 </select>
             </div>
 
+
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Photo</label>
@@ -23,10 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-12">
-                <label for="formGroupExampleInput2" class="form-label">Date</label>
-                <input type="text" class="date form-control" placeholder="isi kan tanggal pembuatan" name="date" />
-            </div>
+
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

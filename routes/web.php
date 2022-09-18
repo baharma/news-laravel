@@ -25,7 +25,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('descriptsion', 'DescripsionController');
     Route::resource('imagenews', 'ImageNewsController');
     Route::resource('newslatter', 'NewslatterController');
-    Route::resource('thumnail', 'ThumbnailController');
+    Route::resource('thumnail', 'ThumnaildController');
     Route::resource('category', 'CategoryController');
 });
 

@@ -19,11 +19,11 @@
                     </thead>
                     <tbody>
                         <?php $i=0 ?>
-                        @foreach ($item as $items)  
+                        @foreach ($data as $items)  
                         <?php $i++ ?>
                         <tr>
                             <th scope="row">{{$i}}</th>
-                            <td></td>
+                            <td>{{$items->newsLatter_id->title}}</td>
                             <td><img src="{{$items->image}}" alt=""></td>
                             <td>{{$items->date}}</td>
                             <td style="display:flex ">
@@ -41,7 +41,7 @@
                     </tbody>
                     
                 </table>
-                {{ $item->links() }}
+                {{ $data->links() }}
             </div>
         </div>
     </div>

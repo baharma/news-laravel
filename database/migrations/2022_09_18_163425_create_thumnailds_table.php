@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThumbnailsTable extends Migration
+class CreateThumnaildsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateThumbnailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('thumbnails', function (Blueprint $table) {
+        Schema::create('thumnailds', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('newslatter_id');
+            $table->uuid('title_news');
             $table->text('image');
-            $table->string('date');
+
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateThumbnailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thumbnails');
+        Schema::dropIfExists('thumnailds');
     }
 }

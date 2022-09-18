@@ -2,11 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
-use App\Newslatter;
+use Illuminate\Database\Eloquent\Model;
 
-class Thumbnail extends Model
+class Thumnaild extends Model
 {
     protected $guarded = [];
     protected $casts = [
@@ -20,8 +19,9 @@ class Thumbnail extends Model
             $model->id = Uuid::uuid4();
         });
     }
-    public function newsLattera()
+
+    public function newsLatter_id()
     {
-        return  $this->belongsTo(Newslatter::class, 'newslatter_id', 'id');
+        return $this->belongsTo(Newslatter::class, 'title_news');
     }
 }
