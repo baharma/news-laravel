@@ -30,7 +30,14 @@
                             <td>{{$items->descripsion_event->description}}</td>
                             <td>{{$items->category_event->title}}</td>
                             <td>{{$items->date}}</td>
-                            <td></td>
+                            <td>                                <a href="{{route('newslatter.edit',$items->id)}}" class="m-1 btn btn-info">
+                                <i class="fa fa-pencil-alt">Edit</i>
+                            </a>
+                            <form method="POST" class="m-1" action="{{route('newslatter.destroy', $items->id)}}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" data-id="{{$items->id}}" class="btn btn-danger delete-item" data-toggle="tooltip" title='Delete'> <i class="fa fa-trash">Delete</i></button>
+                            </form></td>
                         </tr>
                         @endforeach
                     </tbody>

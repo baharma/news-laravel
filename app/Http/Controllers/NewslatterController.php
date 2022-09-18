@@ -115,9 +115,21 @@ class NewslatterController extends Controller
      * @param  \App\Newslatter  $newslatter
      * @return \Illuminate\Http\Response
      */
-    public function edit(Newslatter $newslatter)
+    public function edit($id)
     {
-        //
+        $data = Newslatter::find($id);
+        $category =  Category::find($data->category_id);
+        $Descripsions = Descripsion::find($data->description_id);
+        $image = ImageNews::find($data->image_id);
+       
+        $categorydata = Category::all();
+        return view('back-end.admin.newslatter.edit',[
+            'category'=>$category,
+            'Descripsions'=>$Descripsions,
+            'image'=>$image,
+            'data'=>$data,
+            'categorydata'=>$categorydata
+        ]);
     }
 
     /**
@@ -127,9 +139,57 @@ class NewslatterController extends Controller
      * @param  \App\Newslatter  $newslatter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Newslatter $newslatter)
+    public function update(Request $request,$id)
     {
-        //
+        $name = rand(1, 99999) . now()->format('Y-m-d-H-i-s');
+
+        $dataNews = Newslatter::find($id);
+
+        if ($request->file('image_id')) {
+            $image = $request->file('image_id');
+            $name_img = $name . '.' . $image->getClientOriginalExtension();
+            $path = public_path('assets/img');
+            $imgImage = Image::make($image->getRealPath());
+            $imgImage->resize(400, 400, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path . '/' . $name_img);
+
+            $dataImageNews = ImageNews::find($dataNews->image_id);
+            $dataImageNews->title = $request->title;
+            $dataImageNews->image = asset('assets/img') . '/' . $name_img;
+            $dataImageNews->date = $request->date;
+            $dataImageNews->update();
+        } else {
+            $dataImageNews = ImageNews::find($dataNews->image_id);
+            $dataImageNews->title = $request->title;
+
+            $dataImageNews->date = $request->date;
+            $dataImageNews->update();
+        }
+
+        $dataDescripsions =  Descripsion::find($dataNews->description_id);
+        $dataDescripsions->title = $request->title;
+        $dataDescripsions->description = $request->description_id;
+        $dataDescripsions->date = $request->date;
+        $dataDescripsions->update();
+
+
+
+
+        $form = array(
+            'title' => $request->title,
+            'slug' => $request->title,
+            'image_id' => $dataImageNews->id,
+            'description_id' => $dataDescripsions->id,
+            'category_id' => $request->category_id,
+            'users' => $request->users,
+            'date' => $request->date,
+        );
+
+        Newslatter::whereId($id)->update($form);
+
+        return redirect()->route('newslatter.index')->with('message', 'Data created !');
+
     }
 
     /**
@@ -138,8 +198,9 @@ class NewslatterController extends Controller
      * @param  \App\Newslatter  $newslatter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Newslatter $newslatter)
+    public function destroy($id)
     {
-        //
+        Newslatter::whereId($id)->delete();
+        return redirect()->back()->with('message', 'Data delete !');
     }
 }

@@ -31,14 +31,14 @@ class Newslatter extends Model
 
     public function descripsion_event()
     {
-        return $this->hasMany(Descripsion::class, 'id', 'description_id');
+        return $this->belongsTo(Descripsion::class, 'description_id');
     }
     public function category_event()
     {
-        return $this->hasMany(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
     public function image_event()
     {
-        return $this->hasMany(ImageNews::class, 'id', 'image_id');
+        return $this->belongsTo(ImageNews::class, 'image_id');
     }
 }
