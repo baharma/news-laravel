@@ -16,12 +16,12 @@ class CreateThumnaildsTable extends Migration
         Schema::create('thumnailds', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('title_news');
+            $table->string('descripsion', 255);
             $table->text('image');
-
+            $table->string('date');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

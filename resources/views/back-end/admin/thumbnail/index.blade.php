@@ -10,11 +10,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" width="10%">#</th>
-                            <th scope="col"width="30%">Title</th>
-                            <th scope="col"width="30%">Image</th>
-                            <th scope="col"width="30%">Date</th>
-                            <th scope="col" width="10%">Action</th>
+                            <th scope="col" >#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Image</th>
+                            <th scope="col" >descripsion</th>
+                            <th scope="col">Date</th>
+                            <th scope="col" >Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,7 @@
                             <th scope="row">{{$i}}</th>
                             <td>{{$items->newsLatter_id->title}}</td>
                             <td><img src="{{$items->image}}" alt=""></td>
+                            <td>{{$items->descripsion}}</td>
                             <td>{{$items->date}}</td>
                             <td style="display:flex ">
                                 <a href="{{route('thumnail.edit',$items->id)}}" class="m-1 btn btn-info">
