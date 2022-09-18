@@ -1,4 +1,5 @@
 @extends('back-end.layout.app')
+@section('page_name','Category')
 @section('content')
 <form method="POST" action="{{route('category.store')}}" class="card mt-4 m-3">
     @csrf

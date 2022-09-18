@@ -1,4 +1,5 @@
 @extends('back-end.layout.app')
+@section('page_name','Category')
 @section('content')
 <div class="row row-xs">
     <div class="col-sm-6 col-lg-12">

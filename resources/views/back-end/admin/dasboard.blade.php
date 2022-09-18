@@ -1,4 +1,5 @@
 @extends('back-end.layout.app')
+@section('page_name','Dashboard')
 @section('content')
 <div class="row">
 

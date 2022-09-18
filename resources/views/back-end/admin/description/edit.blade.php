@@ -1,4 +1,5 @@
 @extends('back-end.layout.app')
+@section('page_name','Descriptsion')
 @section('content')
 <form method="POST" action="{{route('descriptsion.update',$descripsion->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
     @csrf
