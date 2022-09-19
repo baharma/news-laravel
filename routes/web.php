@@ -31,6 +31,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 
 
+Route::prefix('latter')->middleware(['auth', 'latter'])->group(function () {
+    Route::get('/', 'news\IndexController@index')->name('home');
+    Route::resource('newsaatter', 'news\NewsLatterController');
+    Route::resource('thumNails', 'news\ThumnailController');
+});
+
 
 
 

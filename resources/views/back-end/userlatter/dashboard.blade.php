@@ -1,4 +1,4 @@
-@extends('back-end.layout.app')
+@extends('back-end.userlatter.layout.app')
 @section('content')
 <div class="row">
 
@@ -90,5 +90,4 @@
 
 
 
-<h1>Not Admin</h1>
 @endsection

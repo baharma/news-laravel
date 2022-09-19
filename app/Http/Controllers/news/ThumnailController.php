@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\news;
 
+use App\Http\Controllers\Controller;
 use App\Newslatter;
 use App\Thumnaild;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\MockObject\Stub\ReturnSelf;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\DB;
 
-class ThumnaildController extends Controller
+class ThumnailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,9 @@ class ThumnaildController extends Controller
      */
     public function index()
     {
-        $data = Thumnaild::with('newsLatter_id')->orderBy('created_at', 'desc')->paginate('10');
-        return view('back-end.admin.thumbnail.index', [
+        $data = Thumnaild::with('newsLatter_id')
+            ->where('users', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('10');
+        return view('back-end.userlatter.thumnaild.index', [
             'data' => $data
         ]);
     }
@@ -33,7 +35,7 @@ class ThumnaildController extends Controller
     {
         $item = Newslatter::all();
         return view(
-            'back-end.admin.thumbnail.add',
+            'back-end.userlatter.thumnaild.add',
             ['item' => $item]
         );
     }
@@ -61,20 +63,22 @@ class ThumnaildController extends Controller
                     'title_news' => $request->title_news,
                     'image' => asset('assets/img') . '/' . $name_img,
                     'descripsion' => $request->descripsion,
-                    'date' => $request->date
+                    'date' => $request->date,
+                    'users' => $request->users
                 );
             } else {
                 $dataArray = array(
                     'title_news' => $request->title_news,
                     'image' => asset('assets/img/notfount.png'),
                     'descripsion' => $request->descripsion,
-                    'date' => $request->date
+                    'date' => $request->date,
+                    'users' => $request->users
                 );
             }
 
             Thumnaild::create($dataArray);
             DB::commit();
-            return redirect()->route('thumnail.index')->with('message', 'Data created !');
+            return redirect()->route('thumNails.index')->with('message', 'Data created !');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()
@@ -88,10 +92,10 @@ class ThumnaildController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Thumnaild  $thumnaild
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Thumnaild $thumnaild)
+    public function show($id)
     {
         //
     }
@@ -99,7 +103,7 @@ class ThumnaildController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Thumnaild  $thumnaild
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -107,7 +111,7 @@ class ThumnaildController extends Controller
         $item = Thumnaild::find($id);
         $newsid = Newslatter::find($item->title_news);
         $allNews = Newslatter::all();
-        return view('back-end.admin.thumbnail.edit', [
+        return view('back-end.userlatter.thumnaild.edit', [
             'item' => $item,
             'newsid' => $newsid,
             'allNews' => $allNews
@@ -118,7 +122,7 @@ class ThumnaildController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Thumnaild  $thumnaild
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -150,7 +154,7 @@ class ThumnaildController extends Controller
 
             Thumnaild::whereId($id)->update($dataArray);
             DB::commit();
-            return redirect()->route('thumnail.index')->with('message', 'Data Updates !');
+            return redirect()->route('thumNails.index')->with('message', 'Data Updates !');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()
@@ -164,7 +168,7 @@ class ThumnaildController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Thumnaild  $thumnaild
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDescripsionsTable extends Migration
+class AddUsersFieldToUsersThumnailds extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateDescripsionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('descripsions', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('title');
-            $table->string('description', 9999);
-            $table->string('date');
-            $table->timestamps();
+        Schema::table('thumnailds', function (Blueprint $table) {
+            $table->uuid('users')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateDescripsionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('descripsions');
+        Schema::table('thumnailds', function (Blueprint $table) {
+            $table->dropColumn('users');
+        });
     }
 }

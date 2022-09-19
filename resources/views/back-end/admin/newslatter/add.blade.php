@@ -40,9 +40,8 @@
             </div>
 
             <div class=" col-12">
-                <label for="formGroupExampleInput" class="form-label">Nama Anda</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" name="users"
-                    placeholder="Example input placeholder" value="   {{ Auth::user()->name }}" readonly>
+                <input type="hidden" class="form-control" id="formGroupExampleInput" name="users"
+                    placeholder="Example input placeholder" value="{{ Auth::user()->id}}" readonly>
             </div>
             <div class="col-12">
                 <label for="formGroupExampleInput2" class="form-label">Date</label>

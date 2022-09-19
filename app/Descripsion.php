@@ -24,6 +24,6 @@ class Descripsion extends Model
     }
     public function descripsion_news()
     {
-        return $this->hasMany(Newslatter::class, 'id', 'description_id');
+        return $this->hasMany(Newslatter::class, 'description_id');
     }
 }

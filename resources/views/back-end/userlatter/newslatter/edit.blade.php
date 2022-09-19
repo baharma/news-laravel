@@ -1,7 +1,7 @@
-@extends('back-end.layout.app')
+@extends('back-end.userlatter.layout.app')
 @section('page_name','Newslatter')
 @section('content')
-<form method="POST" action="{{route('newslatter.update',$data->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
+<form method="POST" action="{{route('newsaatter.update',$data->id)}}" class="card mt-4 m-3" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mb-3 card-body">
@@ -41,9 +41,9 @@
             </div>
 
             <div class=" col-12">
-                <label for="formGroupExampleInput" class="form-label">Nama Anda</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" name="users"
-                    placeholder="Example input placeholder" value="{{ Auth::user()->name }}" readonly>
+              
+                <input type="hidden" class="form-control" id="formGroupExampleInput" name="users"
+                    placeholder="Example input placeholder" value="{{ Auth::user()->id }}" readonly>
             </div>
             <div class="col-12">
                 <label for="formGroupExampleInput2" class="form-label">Date</label>
