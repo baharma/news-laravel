@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', 'reader\HomeController@index');
+Route::get('/detail/{id}', 'reader\HomeController@show');
 //resorce admin
 
 
